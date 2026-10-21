@@ -25,5 +25,5 @@ To make this run automatically and silently at startup without UAC prompts:
 
 ### Credits
 The USB power cycling is handled by `RestartUsbPort.exe`, created by Uwe Sieber (www.uwe-sieber.de).
-Scripts written by Raznus Framework.
+Scripts written by Raznus Framework™
 in 2026 from Hungary.
