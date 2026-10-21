@@ -1,7 +1,7 @@
 # Razer Base Station V2 Chroma RGB Freeze Fix
 
 ### The Problem
-When using the Razer Chroma Visualizer with 3 or more active Razer devices, the Razer Base Station V2 Chroma's RGB lights tends to freeze and become unresponsive after Windows startup. 
+When using the Razer Chroma Visualizer with 3 or more active Razer devices, the Razer Base Station V2 Chroma's RGB lights tends to freeze and become unresponsive.
 
 ### The Solution
 This lightweight automated script fixes the freezing issue by forcefully resetting the USB port power of the Base Station shortly after boot. Once the script runs silently in the background, the device reconnects and works flawlessly without freezing until the next PC restart.
