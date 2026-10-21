@@ -1,0 +1,129 @@
+
+RestartUsbPort V1.2.1 - Restarts a USB port
+Freeware by Uwe Sieber - www.uwe-sieber.de
+
+RestartUsbPort performs a USB port restart by commandline. You can try first in the GUI application
+"USB Device Tree Viewer" by right-clicking a device and select "Restart Port" to see if it is useful.
+In contrast to a device restart thru the device manager, the device's driver stack is not asked for
+permission, so it always works. It is more like re-plugging the USB device.
+
+It works on Windows XP, 8, 10, 11 and their Server versions. It does not work under Windows Vista and 7.
+
+Under Windows 8..11 admin privileges are required or an active USBDLM command interface.
+
+The Win32 version works on x64 Windows too for port reset for the 'Uninstall driver' function the
+the x64 version is required.
+
+
+Usage:
+RestartUsbPort [PortId] [-l] [u] [-na] [-w:nnnn]
+PortId can be
+ a device instance ID
+ a driver key name
+ a device friendly name
+ a location info
+ a port chain in UsbTreeView style
+-l       lists USB ports that can be restarted
+-u       uninstall driver before port restart
+-na      no about info
+-n       no wait for keypress when started standalone
+-w:nnnn  waits n milliseconds before end
+-d:nnnn  delays nnnn milliseconds on start
+
+By default it waits for a key press if started standalone (if it owns the console window).
+With -n it ends immediately, with -w:nnnn it waits nnnn milliseconds (or a keypress) and
+ends then. -w overrules -n.
+
+Since V1.1 it finds devices which have a problem code in the device management.
+
+
+Samples:
+
+RestartUsbPort -l
+
+RestartUsbPort "USB\VID_0781&PID_5580\AA010319131128161470"
+
+RestartUsbPort {36fc9e60-c465-11cf-8056-444553540000}\0007
+
+RestartUsbPort "Sandisk Extreme"
+
+RestartUsbPort Port_#0002.Hub_#0008
+
+RestartUsbPort 1-4-2
+
+RestartUsbPort 1-4-2 -u
+
+RestartUsbPort 1-4-2 -w:1000
+
+
+Returns Errorlevels:
+
+0 - successfully restarted the USB port
+1 - no parameters
+2 - invalid parameters
+3 - given ID not found or no device is attached to the port
+4 - restart tried but failed
+
+
+Requirements
+
+For restarting a USB port there must be a device attached and the Windows
+Device Manager must have created a device instance for the device.
+Admin privileges are required for port restart and uninstalling a driver.
+
+
+Background information
+
+This tool calls IOCTL_USB_HUB_CYCLE_PORT which triggers a re-enumeration
+of the attached device. Microsoft says it power-cycles the device.
+The function is available under XP but usually only for hubs which run
+with the Microsoft standard driver. 3rd party drivers usually return
+ERROR_UNKNOWN_FUNCTION.
+Under Vista and Windows 7 it is no more supported by the Windows standard
+drivers, it always fails with ERROR_NOT_SUPPORTED.
+Since Windows 8 it works again but in contrast to XP admin privileges
+are required. Without admin privileges it fails as under Vista and Win7
+with ERROR_NOT_SUPPORTED or since Win10 version 1903 with ERROR_GEN_FAILURE,
+which both are quite missleading here since it's a privilege issue.
+
+
+Using USBDLM command interface
+
+The USBDLM service provides a command interface for some windows operations
+which require admin privileges. See USBDLM help section Settings.
+If active, RestartUsbPort can work without admin privileges.
+https://www.uwe-sieber.de/usbdlm_e.html
+
+
+
+
+Licence
+
+
+RestartUsbPort is Freeware.
+
+Allowed:
+- usage in any environment, including commercial
+- include in software products, including commercial
+- include on CD/DVD of computer magazines
+- making available for download by means of package managers
+
+Not allowed:
+- changing any of the files
+- offer for download by means of a "Downloader" software
+
+
+
+Hints:
+
+A GUI software to try a USB port restart is UsbTreeView:
+https://www.uwe-sieber.de/usbtreeview_e.html
+A commandline tool which list USB devices is ListUsbDevs:
+https://www.uwe-sieber.de/misc_tools_e.html#ListUsbDevs
+
+
+Uwe Sieber
+June 2023
+mail@uwe-sieber.de
+
+
